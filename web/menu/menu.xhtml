@@ -1,0 +1,106 @@
+<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:b="http://bootsfaces.net/ui">
+
+    <h:head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <h:outputStylesheet name="./css/default.css"/>
+        <h:outputStylesheet name="./css/tableLayout.css"/>
+        <title>IES N.S.P.S.</title>
+    </h:head>
+
+    <h:body>
+        
+        <table width="100%" >
+            <tr>
+                <td id="top">
+                    <ui:insert name="top">
+                        <h:form>
+                            <b:navBar brand="IES. N.S.P.S." brandHref="#" inverse="true" fixed="top" sticky="false" >
+                            <b:navbarLinks>
+                                
+                                <b:dropMenu value="Mantenimientos" style="color: #ffffff">
+                                    
+                                    <b:navLink style="color: #000000" value="T. Usuario" href="tipousuario.xhtml"></b:navLink>
+                                <b:navLink style="color: #000000"  value="T. Actividad" href="tipoactividad.xhtml"></b:navLink>
+                                <b:navLink style="color: #000000" value="T. Documento" href="tipodocumento.xhtml"></b:navLink>
+                                <b:navLink style="color: #000000"  value="T. Asistencia" href="tipoasistencia.xhtml"></b:navLink>
+                                <b:navLink style="color: #000000"  value="Aulas" href="aula.xhtml"></b:navLink>
+                                <b:navLink style="color: #000000"  value="Periodo de Estudio" href="periodo.xhtml"></b:navLink>
+                                <b:navLink style="color: #000000"  value="Aulas por Periodo" href="aulaperiodo.xhtml"></b:navLink>
+                                
+                                </b:dropMenu>
+                                 <b:dropMenu value="Alumnos" style="color: #ffffff">
+                                    
+                                    <b:navLink style="color: #000000" value="Estudiantes" href="estudiante.xhtml"></b:navLink>
+                                    <b:navLink style="color: #000000" value="Matrícula" href="matricula.xhtml"></b:navLink>
+                                
+                                
+                                </b:dropMenu>
+                                <b:dropMenu value="Personal" style="color: #ffffff">
+                                    <b:navLink style="color: #000000" value="Docentes, Personal Administrativo" href="personal.xhtml"></b:navLink>
+                                    <b:navLink style="color: #000000" value="Registro de Horarios" href="horario.xhtml"></b:navLink>
+                                    <b:navLink style="color: #000000" value="Registro de Currícula" href="registrocurricula.xhtml"></b:navLink>
+                                    <b:navLink style="color: #000000" value="Cambiar Currícula" href="cambiarcurricula.xhtml"></b:navLink>
+                                    
+                                
+                                
+                                </b:dropMenu>
+                                 <b:dropMenu value="Reportes" style="color: #ffffff">
+                                     
+                                     <b:navLink style="color: #000000" value="Asistencia de Personal" href="reporte2asistenciadocente.xhtml"></b:navLink>
+                                     <b:navLink style="color: #000000" value="Record Asistencia de Estudiante" href="reporte2asistencia.xhtml"></b:navLink>
+                                     <b:navLink style="color: #000000" value="Asistencia de Estudiante por aula" href="reporte3asistencia.xhtml"></b:navLink>
+                                    <!--<b:navLink style="color: #000000" value="Matriculas" href="#"></b:navLink>
+                                    <b:navLink style="color: #000000" value="Horarios" href="#"></b:navLink> -->
+                                    <b:navLink style="color: #000000" value="Lista de Estudiantes" href="reporte1.xhtml"></b:navLink>
+                                    <!--<b:navLink style="color: #000000" value="Lista de Personal" href="#"></b:navLink>-->
+                                    
+                                
+                                
+                                </b:dropMenu>
+                                
+                                
+                            </b:navbarLinks>
+                            <b:navbarLinks pull="right">
+<b:navLink style="color: #ffffff" value="Asis. Estudiante" href="asistenciaestudiante.xhtml"></b:navLink>
+<b:dropMenu value="Asis. Personal" style="color: #ffffff">
+    <b:navLink style="color: #045491" value="Marcar asistencia" href="asistenciapersonal.xhtml"></b:navLink>
+    <b:navLink style="color: #045491" value="Marcas Salida" href="marcarsalida.xhtml"></b:navLink>
+</b:dropMenu>
+
+                                
+                                <b:dropMenu value="#{bienvenidoBean.usuario.apellidos}"  style="color: #ffffff"  >
+                                    <b:navLink style="color: #045491" value="Mi Horario" href="consultahorarios.xhtml"></b:navLink>
+                                    <b:navLink style="color: #045491" value="Mi Cuenta" href="micuenta.xhtml"></b:navLink>
+                                    <b:navCommandLink style="color: cadetblue; font-style: initial;  "   value="Cerrar Sesion"  action="#{bienvenidoBean.cerrarsesion()}" />
+                                    
+                                </b:dropMenu>
+                               
+                            </b:navbarLinks>
+                        </b:navBar>
+                            </h:form>
+                    </ui:insert>
+                </td>
+            </tr>
+            <tr>
+                <td id="content">
+                    <br/>
+                    <ui:insert name="content">
+                        <b:row>
+  <b:image small-screen="one-third" value="../resources/img/IMG-20180906-WA0021.jpg" tooltip="small-screen='one-third'"/>
+  <b:image small-screen="one-third" value="../resources/img/IMG-20180906-WA0021.jpg" tooltip="small-screen='one-third'"/>
+  <b:image small-screen="one-third" hidden="tiny-screen" value="../resources/img/IMG-20180906-WA0026.jpg" tooltip="small-screen='one-third' hidden='tiny-screen'"/>
+</b:row>
+                      
+                    </ui:insert>
+                </td>
+            </tr>
+        </table>
+    </h:body>
+
+</html>

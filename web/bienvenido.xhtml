@@ -1,0 +1,44 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns="http://www.w3.org/1999/xhtml"
+                template="./menu/menu.xhtml"
+                xmlns:b="http://bootsfaces.net/ui"
+                xmlns:h="http://xmlns.jcp.org/jsf/html">
+    
+    <ui:define name="content"  >
+        <h:form style="background-color: #045491">
+        <br/>
+      
+        <h2 align="center" style="color: #ffffff;" >I.E.S. Nuestra Señora Del Perpetuo Socorro</h2>
+        <br/>
+        <div class="container">
+            <b:carousel id="tiovivo" col-md="12" col-sm="12" interval="2500">
+  
+  <b:carouselItem caption="I.E.S N.S.P.S">
+      <b:image small-screen="one-third"  col-md="12" col-sm="12"  value="../resources/img/IMG-20180906-WA0021.jpg" style=" align-items: center; width: 1000px; height: 500px;"/>
+      <b:carouselCaption>
+      
+
+    </b:carouselCaption>
+    
+  </b:carouselItem>
+  <b:carouselItem caption="I.E.S N.S.P.S">
+      <b:image small-screen="one-third" col-md="12" col-sm="12"  value="../resources/img/IMG-20180906-WA0025.jpg" style="width: 1000px; height: 500px;"/>
+    
+  </b:carouselItem>
+  <b:carouselItem>
+      <b:image small-screen="one-third" col-md="12" col-sm="12"  value="../resources/img/IMG-20180906-WA0026.jpg" style="width: 1000px; height: 500px;"/>
+    <b:carouselCaption>
+       <h2>I.E.S N.S.P.S</h2>
+      
+    </b:carouselCaption>
+  </b:carouselItem>
+
+</b:carousel>
+        
+            </div>
+        </h:form>
+    </ui:define>
+
+</ui:composition>

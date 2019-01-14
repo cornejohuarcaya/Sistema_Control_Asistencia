@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="d9ed0198-78bb-4d29-bb57-2fa6ea8a9435">
+	<property name="ireport.zoom" value="3.305785123966942"/>
+	<property name="ireport.x" value="1018"/>
+	<property name="ireport.y" value="167"/>
+	<parameter name="dni" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[SELECT
+     tbhorario.`Id_Horario` AS tbhorario_Id_Horario,
+     tbhorario.`Id_TipoActividad` AS tbhorario_Id_TipoActividad,
+     tbhorario.`Id_Usuario` AS tbhorario_Id_Usuario,
+     tbhorario.`Id_AulaPeriodo` AS tbhorario_Id_AulaPeriodo,
+     tbhorario.`Dia` AS tbhorario_Dia,
+     tbhorario.`HoraEntrada` AS tbhorario_HoraEntrada,
+     tbhorario.`HoraSalida` AS tbhorario_HoraSalida,
+     tbhorario.`activo` AS tbhorario_activo,
+     tbusuario.`NumeroDoc` AS tbusuario_NumeroDoc,
+     tbusuario.`Activo` AS tbusuario_Activo,
+     tbtipoactividad.`Actividad` AS tbtipoactividad_Actividad,
+     tbaulaperiodo.`Id_AulaPeriodo` AS tbaulaperiodo_Id_AulaPeriodo,
+     tbaulaperiodo.`Id_Aula` AS tbaulaperiodo_Id_Aula,
+     tbaulaperiodo.`Id_PeriodoEstudio` AS tbaulaperiodo_Id_PeriodoEstudio,
+     tbaula.`Id_Aula` AS tbaula_Id_Aula,
+     tbaula.`Anio` AS tbaula_Anio,
+     tbaula.`Seccion` AS tbaula_Seccion,
+     tbperiodoestudio.`Id_PeriodoEstudio` AS tbperiodoestudio_Id_PeriodoEstudio,
+     tbperiodoestudio.`Anio` AS tbperiodoestudio_Anio
+FROM
+     `tbusuario` tbusuario INNER JOIN `tbhorario` tbhorario ON tbusuario.`Id_Usuario` = tbhorario.`Id_Usuario`
+     INNER JOIN `tbtipoactividad` tbtipoactividad ON tbhorario.`Id_TipoActividad` = tbtipoactividad.`Id_TipoActividad`
+     INNER JOIN `tbaulaperiodo` tbaulaperiodo ON tbhorario.`Id_AulaPeriodo` = tbaulaperiodo.`Id_AulaPeriodo`
+     INNER JOIN `tbaula` tbaula ON tbaulaperiodo.`Id_Aula` = tbaula.`Id_Aula`
+     INNER JOIN `tbperiodoestudio` tbperiodoestudio ON tbaulaperiodo.`Id_PeriodoEstudio` = tbperiodoestudio.`Id_PeriodoEstudio`
+WHERE
+     tbusuario.`NumeroDoc` = $P{dni}
+     and tbusuario.`Activo` = 1
+     and tbhorario.`activo` = 1]]>
+	</queryString>
+	<field name="tbhorario_Id_Horario" class="java.lang.Integer"/>
+	<field name="tbhorario_Id_TipoActividad" class="java.lang.Integer"/>
+	<field name="tbhorario_Id_Usuario" class="java.lang.Integer"/>
+	<field name="tbhorario_Id_AulaPeriodo" class="java.lang.Integer"/>
+	<field name="tbhorario_Dia" class="java.lang.String"/>
+	<field name="tbhorario_HoraEntrada" class="java.sql.Time"/>
+	<field name="tbhorario_HoraSalida" class="java.sql.Time"/>
+	<field name="tbhorario_activo" class="java.lang.Boolean"/>
+	<field name="tbusuario_NumeroDoc" class="java.lang.String"/>
+	<field name="tbusuario_Activo" class="java.lang.Boolean"/>
+	<field name="tbtipoactividad_Actividad" class="java.lang.String"/>
+	<field name="tbaulaperiodo_Id_AulaPeriodo" class="java.lang.Integer"/>
+	<field name="tbaulaperiodo_Id_Aula" class="java.lang.Integer"/>
+	<field name="tbaulaperiodo_Id_PeriodoEstudio" class="java.lang.Integer"/>
+	<field name="tbaula_Id_Aula" class="java.lang.Integer"/>
+	<field name="tbaula_Anio" class="java.lang.String"/>
+	<field name="tbaula_Seccion" class="java.lang.String"/>
+	<field name="tbperiodoestudio_Id_PeriodoEstudio" class="java.lang.Integer"/>
+	<field name="tbperiodoestudio_Anio" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="57" splitType="Stretch"/>
+	</title>
+	<pageHeader>
+		<band height="19" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="22" splitType="Stretch">
+			<staticText>
+				<reportElement x="2" y="2" width="69" height="20" uuid="ca52da68-1cda-4890-9c95-cfd3aecd6419"/>
+				<text><![CDATA[Día]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="75" y="2" width="100" height="20" uuid="28536751-bd18-4783-8bcb-5488371d64fb"/>
+				<text><![CDATA[Hora Entrada]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="175" y="2" width="100" height="20" uuid="68b87b97-5545-42b8-915d-c4345f1e9526"/>
+				<text><![CDATA[Hora Salida]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="276" y="2" width="100" height="20" uuid="8fdc6597-7889-475d-8868-876a86670073"/>
+				<text><![CDATA[Año]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="376" y="2" width="100" height="20" uuid="a55129c8-81c6-4b35-82f6-8996557693d5"/>
+				<text><![CDATA[Seccion]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="476" y="2" width="79" height="20" uuid="68322ffa-cdf0-420c-a88c-9f741bb407fe"/>
+				<text><![CDATA[Periodo]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="21" splitType="Stretch">
+			<rectangle>
+				<reportElement x="0" y="0" width="554" height="20" uuid="873adbd0-4ca3-4163-9bf0-7b741b435121"/>
+			</rectangle>
+			<textField>
+				<reportElement x="2" y="0" width="69" height="20" uuid="d110e750-79cd-49ec-be5b-9403f94bab4f"/>
+				<textFieldExpression><![CDATA[$F{tbhorario_Dia}]]></textFieldExpression>
+			</textField>
+			<textField pattern="h.mm a">
+				<reportElement x="75" y="0" width="100" height="20" uuid="9cbeb820-691c-46f3-bef2-b414a3122bfd"/>
+				<textFieldExpression><![CDATA[$F{tbhorario_HoraEntrada}]]></textFieldExpression>
+			</textField>
+			<textField pattern="h.mm a">
+				<reportElement x="175" y="0" width="100" height="20" uuid="263c7b2c-961e-49dd-ac29-ef871200b2a2"/>
+				<textFieldExpression><![CDATA[$F{tbhorario_HoraSalida}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="276" y="0" width="100" height="20" uuid="776bb312-47bf-4586-bc7b-be463d40da8d"/>
+				<textFieldExpression><![CDATA[$F{tbaula_Anio}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="376" y="0" width="100" height="20" uuid="d608bdb8-20a7-4b3e-acce-8d2eb500b851"/>
+				<textFieldExpression><![CDATA[$F{tbaula_Seccion}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="476" y="0" width="79" height="20" uuid="7be1572c-eeca-498b-80d2-2b9e7132c54e"/>
+				<textFieldExpression><![CDATA[$F{tbperiodoestudio_Anio}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch">
+			<elementGroup/>
+		</band>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>

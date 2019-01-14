@@ -1,0 +1,71 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns="http://www.w3.org/1999/xhtml"
+                template="./menu/menu.xhtml"
+                xmlns:b="http://bootsfaces.net/ui"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:define name="content">
+        <div class="container">
+            <b:growl id ="msj" placementFrom="top" show-detail="true"
+                                         global-only="false"
+                                         show-summary="true" allow-dismiss="true"
+                                         animation-enter="animated bounceInDown"
+                                         animation-exit="animated flipOutX"
+                                         escape="true" />
+            <f:view>
+
+
+                <h:form>
+                    <h1><h:outputText value="Tipo de Asistencia"/></h1>
+                    <h:panelGrid columns="2">
+                        
+                        
+                        <h:outputLabel value="Tipoasistencia:" for="tipoasistencia" />
+                        <b:inputText id="tipoasistencia" value="#{tipoasistenciaBean.tipoasistencia.tipoasistencia}" title="Tipoasistencia" />
+                        <h:outputLabel value="Descripcion:" for="descripcion" />
+                        <b:inputText  id="descripcion" value="#{tipoasistenciaBean.tipoasistencia.descripcion}" title="Descripcion" />
+                        <b:inputText hidden="lg,md,sm,xs" id="id_tipoasistencia" value="#{tipoasistenciaBean.tipoasistencia.id_tipoasistencia}" title="Id_tipoasistencia" />
+                    </h:panelGrid>
+                    <b:commandButton  look="primary"   value="Confirmar" actionListener="#{tipoasistenciaBean.registraractualziar()}" ></b:commandButton>
+                    <b:commandButton look="success" value="Cancelar" actionListener="#{tipoasistenciaBean.cancelar()}" ></b:commandButton>
+                </h:form>
+            </f:view>
+<br/>
+        
+<f:view>
+
+
+    <h:form>
+        
+        <h:dataTable value="#{tipoasistenciaBean.lista}" var="item">
+           
+            <h:column>
+                <f:facet name="header">
+                    <h:outputText value="Tipoasistencia"/>
+                </f:facet>
+                <h:outputText value="#{item.tipoasistencia}"/>
+            </h:column>
+            <h:column>
+                <f:facet name="header">
+                    <h:outputText value="Descripcion"/>
+                </f:facet>
+                <h:outputText value="#{item.descripcion}"/>
+            </h:column>
+             <h:column>
+                <f:facet name="header">
+                    <h:outputText value=""/>
+                </f:facet>
+                 <b:commandButton look="info" value="Editar" actionListener="#{tipoasistenciaBean.seleccionar(item)}"> </b:commandButton>
+            </h:column>
+        </h:dataTable>
+    </h:form>
+</f:view>
+
+        </div>
+        
+    </ui:define>
+
+</ui:composition>

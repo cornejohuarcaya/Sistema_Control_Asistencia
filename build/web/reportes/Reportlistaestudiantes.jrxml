@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="7eca8e8b-c121-49ac-aafb-84cc3c8ad26d">
+	<property name="ireport.zoom" value="1.2100000000000004"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<queryString language="SQL">
+		<![CDATA[SELECT
+     tbestudianteaulaperiodo.`Id_EstudianteAulaPeriodo` AS tbestudianteaulaperiodo_Id_EstudianteAulaPeriodo,
+     tbestudiante.`Id_Estudiante` AS tbestudiante_Id_Estudiante,
+     tbestudiante.`Apellidos` AS tbestudiante_Apellidos,
+     tbestudiante.`Nombres` AS tbestudiante_Nombres,
+     tbestudiante.`DNI` AS tbestudiante_DNI,
+     tbaula.`Id_Aula` AS tbaula_Id_Aula,
+     tbaula.`Anio` AS tbaula_Anio,
+     tbaula.`Seccion` AS tbaula_Seccion,
+     tbperiodoestudio.`Id_PeriodoEstudio` AS tbperiodoestudio_Id_PeriodoEstudio,
+     tbperiodoestudio.`Anio` AS tbperiodoestudio_Anio
+FROM
+     `tbaulaperiodo` tbaulaperiodo INNER JOIN `tbestudianteaulaperiodo` tbestudianteaulaperiodo ON tbaulaperiodo.`Id_AulaPeriodo` = tbestudianteaulaperiodo.`Id_AulaPeriodo`
+     INNER JOIN `tbestudiante` tbestudiante ON tbestudianteaulaperiodo.`Id_Estudiante` = tbestudiante.`Id_Estudiante`
+     INNER JOIN `tbaula` tbaula ON tbaulaperiodo.`Id_Aula` = tbaula.`Id_Aula`
+     INNER JOIN `tbperiodoestudio` tbperiodoestudio ON tbaulaperiodo.`Id_PeriodoEstudio` = tbperiodoestudio.`Id_PeriodoEstudio`
+WHERE
+     tbestudianteaulaperiodo.activo = 1
+GROUP BY
+     tbestudianteaulaperiodo.Id_aulaperiodo
+ORDER BY
+     tbestudiante.Apellidos ASC]]>
+	</queryString>
+	<field name="tbestudianteaulaperiodo_Id_EstudianteAulaPeriodo" class="java.lang.Integer"/>
+	<field name="tbestudiante_Id_Estudiante" class="java.lang.Integer"/>
+	<field name="tbestudiante_Apellidos" class="java.lang.String"/>
+	<field name="tbestudiante_Nombres" class="java.lang.String"/>
+	<field name="tbestudiante_DNI" class="java.lang.String"/>
+	<field name="tbaula_Id_Aula" class="java.lang.Integer"/>
+	<field name="tbaula_Anio" class="java.lang.String"/>
+	<field name="tbaula_Seccion" class="java.lang.String"/>
+	<field name="tbperiodoestudio_Id_PeriodoEstudio" class="java.lang.Integer"/>
+	<field name="tbperiodoestudio_Anio" class="java.lang.String"/>
+	<group name="tbestudianteaulaperiodo_Id_EstudianteAulaPeriodo">
+		<groupExpression><![CDATA[$F{tbestudianteaulaperiodo_Id_EstudianteAulaPeriodo}]]></groupExpression>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="32" splitType="Stretch">
+			<textField pattern="EEEEE dd MMMMM yyyy">
+				<reportElement x="455" y="0" width="100" height="20" uuid="536c5ae1-e7f5-40e2-8ffa-34004637995a"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="203" y="0" width="166" height="20" uuid="c7bf3a21-15d1-4d77-aab4-2fd436ee7c73"/>
+				<textElement>
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Lista de Alumnos ]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="7" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="22" splitType="Stretch">
+			<rectangle radius="10">
+				<reportElement x="0" y="0" width="550" height="20" uuid="4bcdd195-999e-4164-a102-1c71bbfab4fd"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="1" y="0" width="55" height="20" uuid="6282881d-1f21-4863-a417-7c665d79fe1d"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[Id]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="58" y="0" width="158" height="20" uuid="0b837f98-131d-4aae-b191-f5092b1a7c79"/>
+				<text><![CDATA[Apellidos]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="216" y="0" width="136" height="20" uuid="27545cd2-33fd-4d0f-a65a-5ab3e2fccb00"/>
+				<text><![CDATA[Nombres]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="352" y="0" width="68" height="20" uuid="c0fa16ab-d39d-4a19-9649-e65195476831"/>
+				<text><![CDATA[DNI]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="420" y="0" width="36" height="20" uuid="95bdac92-da9d-4105-bcc3-f96558fa7e27"/>
+				<text><![CDATA[Año]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="456" y="0" width="37" height="20" uuid="7d9de921-91cc-4362-adb9-a67ee2c4fc4f"/>
+				<text><![CDATA[Sección]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="495" y="0" width="55" height="20" uuid="08f8d561-9da2-49d4-af61-7b9e9683bbaf"/>
+				<text><![CDATA[Año]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="22" splitType="Stretch">
+			<rectangle radius="10">
+				<reportElement x="0" y="0" width="549" height="22" uuid="12076d2e-f289-4747-a863-5f7e7c6e4f95"/>
+			</rectangle>
+			<textField>
+				<reportElement x="1" y="0" width="55" height="20" uuid="59f566b4-b9e5-4e2e-bed6-6cb7a57bd3a7"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{tbestudiante_Id_Estudiante}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="58" y="0" width="158" height="20" uuid="aca5fd22-18c4-4b0c-9990-597bbd5cf503"/>
+				<textFieldExpression><![CDATA[$F{tbestudiante_Apellidos}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="216" y="0" width="136" height="20" uuid="22dc1c6b-ee06-4065-9e91-4b71aef8a7de"/>
+				<textFieldExpression><![CDATA[$F{tbestudiante_Nombres}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="352" y="0" width="68" height="20" uuid="fcaba2d4-843c-4275-8ebd-2112adc5c29b"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{tbestudiante_DNI}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="420" y="0" width="36" height="20" uuid="ab68c190-d3fe-4588-958c-b4b069b40ca3"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{tbaula_Anio}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="456" y="0" width="37" height="20" uuid="f7e4627b-4d8d-452c-b310-35701eb9e11a"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{tbaula_Seccion}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="495" y="0" width="55" height="20" uuid="ac3f3c9b-972d-4962-99b1-50a7ea50c053"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{tbperiodoestudio_Anio}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch">
+			<textField>
+				<reportElement x="435" y="34" width="80" height="20" uuid="596cd113-dddf-448c-a6d2-6779f386102a"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="515" y="34" width="40" height="20" uuid="fb5bacda-a202-4ff8-8423-b65190b9eacb"/>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>

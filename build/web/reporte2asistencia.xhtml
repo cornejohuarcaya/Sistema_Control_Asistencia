@@ -1,0 +1,50 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns="http://www.w3.org/1999/xhtml"
+                template="./menu/menu.xhtml"
+                xmlns:b="http://bootsfaces.net/ui"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:define name="content">
+        <br/>
+        <br/><br/>
+        <div class="container">
+            <b:growl id ="msj" placementFrom="top" show-detail="true"
+                                         global-only="false"
+                                         show-summary="true" allow-dismiss="true"
+                                         animation-enter="animated bounceInDown"
+                                         animation-exit="animated flipOutX"
+                                         escape="true" />
+        
+            <f:view>
+
+
+                <h:form>
+                    
+                    <b:panel title="Record de Asistencia por estudiante" >
+                        <h:outputText value="DNI" ></h:outputText> <br/>
+                        <b:inputText value="#{reporteasisestudianteBean.dni}" placeholder="Numero de Documento" /> <br/>
+                        <h:outputText value="Periodo de Estudio" ></h:outputText> <br/>
+                        <b:selectOneMenu value="#{reporteasisestudianteBean.idaulaperiodo}" > <br/>
+                            <f:selectItems value="#{reporteasisestudianteBean.lstaulaperiodo}" var="item" itemValue="#{item.id_AulaPeriodo}" itemLabel="#{item.id_Aula.anio}#{item.id_Aula.seccion} #{item.id_PeriodoEstudio.anio}" />
+                        </b:selectOneMenu>
+                        
+                    
+                   
+                    <b:commandButton  look="primary"   value="Exportar pdf" actionListener="#{reporteasisestudianteBean.exportaPdf(actionEvent)}" ></b:commandButton>
+                    <b:commandButton look="success" value="Ver pdf" actionListener="#{reporteasisestudianteBean.verPDF(actionEvent)}" ></b:commandButton>
+                    <b:commandButton look="success" value="Exportar Excel" actionListener="#{reporteasisestudianteBean.exportarExcel(actionEvent)}" ></b:commandButton>
+                    <b:commandButton look="success" value="Exportar Word" actionListener="#{reporteasisestudianteBean.exportarDOC(actionEvent)}" ></b:commandButton>
+                    <b:commandButton look="success" value="Exportar PPT" actionListener="#{reporteasisestudianteBean.exportarPPT(actionEvent)}" ></b:commandButton>
+                    </b:panel>
+                </h:form>
+            </f:view>
+
+        </div>
+
+        
+    </ui:define>
+
+</ui:composition>

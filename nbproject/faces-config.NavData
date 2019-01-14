@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Scene Scope="Project" version="2">
+    <Scope Scope="Faces Configuration Only"/>
+    <Scope Scope="Project">
+        <Node id="error.xhtml" x="337" y="236" zoom="true"/>
+        <Node id="periodo.xhtml" x="526" y="415" zoom="true"/>
+        <Node id="index.xhtml" x="-37" y="15" zoom="true"/>
+        <Node id="Login.xhtml" x="8" y="211" zoom="true"/>
+        <Node id="bienvenido.xhtml" x="153" y="105" zoom="true"/>
+        <Node id="tipodocumento.xhtml" x="549" y="303" zoom="true"/>
+        <Node id="asistenciapersonal.xhtml" x="584" y="108" zoom="true"/>
+        <Node id="micuenta.xhtml" x="328" y="307" zoom="true"/>
+        <Node id="tipoactividad.xhtml" x="163" y="416" zoom="true"/>
+        <Node id="estudiante.xhtml" x="39" y="376" zoom="true"/>
+        <Node id="menu/menu.xhtml" x="-68" y="51" zoom="true"/>
+        <Node id="horario.xhtml" x="513" y="231" zoom="true"/>
+        <Node id="aulaperiodo.xhtml" x="373" y="107" zoom="true"/>
+        <Node id="personal.xhtml" x="537" y="466" zoom="true"/>
+        <Node id="tipousuario.xhtml" x="568" y="355" zoom="true"/>
+        <Node id="aula.xhtml" x="332" y="474" zoom="true"/>
+        <Node id="tipoasistencia.xhtml" x="318" y="374" zoom="true"/>
+        <Node id="usuario.xhtml" x="186" y="18" zoom="true"/>
+    </Scope>
+    <Scope Scope="All Faces Configurations"/>
+</Scene>

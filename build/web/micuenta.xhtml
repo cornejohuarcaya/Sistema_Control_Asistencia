@@ -1,0 +1,57 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition 
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                template="./menu/menu.xhtml"
+                
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:b="http://bootsfaces.net/ui">
+
+    <ui:define name="content">
+        
+        <div class="container">
+            <f:view>
+ <b:growl id ="msj" placementFrom="top" show-detail="true"
+                                         global-only="false"
+                                         show-summary="true" allow-dismiss="true"
+                                         animation-enter="animated bounceInDown"
+                                         animation-exit="animated flipOutX"
+                                         escape="true" />
+
+                <h:form>
+                    <br/>
+                    <br/><br/>
+                    <h1 align="center" >Mi cuenta</h1>
+                    <h:panelGrid columns="2">
+                        <h:outputLabel value="Apellidos:" for="apellidos" />
+                        <b:inputText id="apellidos" value="#{micuentaBean.usuario.apellidos}" title="Apellidos" />
+                        <h:outputLabel value="Nombres:" for="nombres" />
+                        <b:inputText id="nombres" value="#{micuentaBean.usuario.nombres}" title="Nombres" />
+                        <h:outputLabel value="Direccion:" for="direccion" />
+                        <b:inputText id="direccion" value="#{micuentaBean.usuario.direccion}" title="Direccion" />
+                        <h:outputLabel value="NumeroDoc:" for="numeroDoc" />
+                        <b:inputText id="numeroDoc" value="#{micuentaBean.usuario.numeroDoc}" title="NumeroDoc" />
+                        <h:outputLabel value="Telefono:" for="telefono" />
+                        <b:inputText id="telefono" value="#{micuentaBean.usuario.telefono}" title="Telefono" />
+                        <h:outputLabel value="Usu:" for="usu" />
+                        <b:inputText id="usu" value="#{micuentaBean.usuario.usu}" title="Usu" />
+                        <h:outputLabel value="Password:" for="pas" />
+                        <b:inputSecret id="pas" value="#{micuentaBean.usuario.pas}" title="Pas" />
+                        <h:outputLabel value="FechaNac:" for="fechaNac" />
+                        <b:dateTimePicker id="fechaNac" format="DD-MM-YYYY" value="#{micuentaBean.usuario.fechaNac}" />
+                        <h:outputLabel value="Email:" for="email" />
+                        <b:inputText id="email" value="#{micuentaBean.usuario.email}" title="Email" />
+                        
+                    </h:panelGrid>
+                    <b:commandButton offset-md="1" col-md="2" look="primary" value="Guardar cambios" actionListener="#{micuentaBean.actualizar()}" />
+                </h:form>
+            </f:view>
+
+        </div>
+            
+        
+    </ui:define>
+
+</ui:composition>

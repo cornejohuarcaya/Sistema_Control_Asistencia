@@ -1,0 +1,144 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                template="./menu/menu.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:b="http://bootsfaces.net/ui"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:define name="content">
+        <div class="container">
+            <b:growl id ="msj" placementFrom="top" show-detail="true"
+                                         global-only="false"
+                                         show-summary="true" allow-dismiss="true"
+                                         animation-enter="animated bounceInDown"
+                                         animation-exit="animated flipOutX"
+                                         escape="true" />
+        
+            <f:view>
+
+
+                <h:form id="reg">
+                    <br/><br/><br/>
+                    <h1><h:outputText value="Horario de trabajo"/></h1>
+                    <h:panelGrid columns="2">
+                       
+                       
+                        <h:outputLabel value="Id_TipoActividad:" for="id_TipoActividad" />
+                        <b:selectOneMenu id="id_TipoActividad" value="#{horarioBean.horario.id_TipoActividad}" title="Id_TipoActividad" >
+                            <!-- TODO: update below reference to list of available items-->
+                            <f:selectItems value="#{horarioBean.lsttipoactividad}" var="tac" itemValue="#{tac}" itemLabel="#{tac.actividad}"/>
+                        </b:selectOneMenu>
+                        <h:outputLabel value="Id_Usuario:" for="id_Usuario" />
+                        <b:selectOneMenu id="id_Usuario" value="#{horarioBean.horario.id_Usuario}" title="Id_Usuario" >
+                            <!-- TODO: update below reference to list of available items-->
+                            <f:selectItems value="#{horarioBean.lstusuario}" var="usu" itemValue="#{usu}" itemLabel="#{usu.apellidos}"/>
+                        </b:selectOneMenu>
+                        <h:outputLabel value="Id_AulaPeriodo:" for="id_AulaPeriodo" />
+                        <b:selectOneMenu id="id_AulaPeriodo" value="#{horarioBean.horario.id_AulaPeriodo}" title="Id_AulaPeriodo" >
+                            <!-- TODO: update below reference to list of available items-->
+                            <f:selectItems value="#{horarioBean.lstaulaper}" var="aup" itemValue="#{aup}" itemLabel="#{aup.id_Aula.anio}#{aup.id_Aula.seccion}-#{aup.id_PeriodoEstudio.anio}"/>
+                        </b:selectOneMenu>
+                        <h:outputLabel value="Dia:" for="dia" />
+                        <b:inputText id="dia" value="#{horarioBean.horario.dia}" placeholder="Lunes"  title="Dia" />
+                        <h:outputLabel value="HoraEntrada:" for="horaEntrada" />
+                        <b:inputText id="horaEntrada" value="#{horarioBean.horario.horaEntrada}" placeholder="HH:mm:ss" title="HoraEntrada" >
+                            <f:convertDateTime pattern="HH:mm:ss" />
+                        </b:inputText>
+                        <h:outputLabel value="HoraSalida:" for="horaSalida" />
+                        <b:inputText id="horaSalida" value="#{horarioBean.horario.horaSalida}"  placeholder="HH:mm:ss"  title="HoraSalida" >
+                        <f:convertDateTime pattern="HH:mm:ss" />
+                        </b:inputText>
+                        <h:outputLabel value="Estado"  />
+                        <b:selectOneMenu id="activo" value="#{horarioBean.horario.activo}" title="Id_Usuario" >
+                            <!-- TODO: update below reference to list of available items-->
+                            <f:selectItem itemValue ="#{horarioBean.activo}" itemLabel="Activo" />
+                            <f:selectItem itemValue ="#{horarioBean.inactivo}" itemLabel="Inactivo" />
+                        </b:selectOneMenu>
+                        <b:inputText id="id_horario" hidden="lg,md,sm,xs" value="#{horarioBean.horario.id}" title="Id_horario" />
+                    </h:panelGrid>
+                    
+                     <b:commandButton  look="primary"   value="Confirmar" actionListener="#{horarioBean.registraractualziar()}" ></b:commandButton>
+                    <b:commandButton look="success" value="Cancelar" actionListener="#{horarioBean.cancelar()}" ></b:commandButton>
+              
+                </h:form>
+            </f:view>
+
+
+
+<br/>
+
+<f:view>
+
+
+    <h:form>
+        <br/>
+        <b:dataTable value="#{horarioBean.lista}" var="item">
+  
+            
+            <h:column>
+                <f:facet name="header">
+                    <h:outputText value="Id_TipoActividad"/>
+                </f:facet>
+                <h:outputText value="#{item.id_TipoActividad.actividad}"/>
+            </h:column>
+            <h:column>
+                <f:facet name="header">
+                    <h:outputText value="Id_Usuario"/>
+                </f:facet>
+                <h:outputText value="#{item.id_Usuario.apellidos}"/>
+            </h:column>
+            <h:column>
+                <f:facet name="header">
+                    <h:outputText value="Id_AulaPeriodo"/>
+                </f:facet>
+                <h:outputText value="#{item.id_AulaPeriodo.id_Aula.anio}#{item.id_AulaPeriodo.id_Aula.seccion}-#{item.id_AulaPeriodo.id_PeriodoEstudio.anio}"/>
+            </h:column>
+            <h:column>
+                <f:facet name="header">
+                    <h:outputText value="Dia"/>
+                </f:facet>
+                <h:outputText value="#{item.dia}"/>
+            </h:column>
+            <h:column>
+                <f:facet name="header">
+                    <h:outputText value="HoraEntrada"/>
+                </f:facet>
+                <h:outputText value="#{item.horaEntrada}">
+                    <f:convertDateTime pattern="HH:mm:ss" />
+                </h:outputText>
+            </h:column>
+            <h:column>
+                <f:facet name="header">
+                    <h:outputText value="HoraSalida"/>
+                </f:facet>
+                <h:outputText value="#{item.horaSalida}">
+                    <f:convertDateTime pattern="HH:mm:ss" />
+                </h:outputText>
+            </h:column>
+            <h:column>
+                <f:facet name="header">
+                    <h:outputText value="Activo"/>
+                </f:facet>
+                <h:outputText value="#{item.activo}">
+                    
+                </h:outputText>
+            </h:column>
+            <h:column>
+                <f:facet name="header">
+                    <h:outputText value=""/>
+                </f:facet>
+                <b:commandButton look="primary" value="Editar" actionListener="#{horarioBean.seleccionar(item)}" update="reg" />    
+            </h:column>
+        </b:dataTable>
+    </h:form>
+</f:view>
+
+
+        
+        </div>
+        
+    </ui:define>
+
+</ui:composition>

@@ -1,0 +1,138 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns="http://www.w3.org/1999/xhtml"
+                template="./menu/menu.xhtml"
+                xmlns:b="http://bootsfaces.net/ui"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:define name="content">
+        <br/>
+        <br/><br/>
+        <div class="container">
+            <b:growl id ="msj" placementFrom="top" show-detail="true"
+                                         global-only="false"
+                                         show-summary="true" allow-dismiss="true"
+                                         animation-enter="animated bounceInDown"
+                                         animation-exit="animated flipOutX"
+                                         escape="true" />
+        
+            <f:view>
+
+
+                <h:form>
+                    <h1><h:outputText value="Estudiante"/></h1>
+                    <h:panelGrid columns="2">
+                        
+                        
+                        <h:outputLabel value="Sexo:" for="sexo" />
+                        <b:selectOneMenu id="sexo" value="#{estudianteBean.estudiante.sexo}" title="Sexo" >
+                            <f:selectItem itemValue="#{estudianteBean.verdadero}" itemLabel="Masculino"></f:selectItem>
+                            <f:selectItem itemValue="#{estudianteBean.falso}" itemLabel="Femenino"></f:selectItem>
+                        </b:selectOneMenu>
+                        <h:outputLabel value="Correoapoderado:" for="correoapoderado" />
+                        <b:inputText id="correoapoderado" value="#{estudianteBean.estudiante.correoapoderado}" title="Correoapoderado" />
+                        <h:outputLabel value="Apellidos:" for="apellidos" />
+                        <b:inputText id="apellidos" value="#{estudianteBean.estudiante.apellidos}" title="Apellidos" />
+                        <h:outputLabel value="Nombres:" for="nombres" />
+                        <b:inputText id="nombres" value="#{estudianteBean.estudiante.nombres}" title="Nombres" />
+                        <h:outputLabel value="Dni:" for="dni" />
+                        <b:inputText id="dni" value="#{estudianteBean.estudiante.dni}" title="Dni" />
+                        <h:outputLabel value="Fecha Nac:" />
+                        <b:dateTimePicker format="DD-MM-YYYY"  value="#{estudianteBean.estudiante.fechanac}" />
+                        <h:outputLabel value="Direccion:" for="direccion" />
+                        <b:inputText id="direccion" value="#{estudianteBean.estudiante.direccion}" title="Direccion" />
+                        <h:outputLabel value="Apoderado:" for="apoderado" />
+                        <b:inputText id="apoderado" value="#{estudianteBean.estudiante.apoderado}" title="Apoderado" />
+                        <h:outputLabel value="Telefonoapoderado:" for="telefonoapoderado" />
+                        <b:inputText id="telefonoapoderado" value="#{estudianteBean.estudiante.telefonoapoderado}" title="Telefonoapoderado" />
+                        <b:inputText id="id_Estudiante" hidden="lg,md,sm,xs"  value="#{estudianteBean.estudiante.id}" title="Id_Estudiante" />
+                    </h:panelGrid>
+                     <b:commandButton  look="primary"   value="Confirmar" actionListener="#{estudianteBean.registraractualziar()}" ></b:commandButton>
+                    <b:commandButton look="success" value="Cancelar" actionListener="#{estudianteBean.cancelar()}" ></b:commandButton>
+                </h:form>
+            </f:view>
+
+<br/>
+
+<f:view>
+
+
+    <h:form>
+        <h1><h:outputText value="List"/></h1>
+        <b:dataTable value="#{estudianteBean.lista}" responsive="true" var="item">
+            <h:column>
+                <f:facet name="header">
+                    <h:outputText value="Sexo"/>
+                </f:facet>
+                <h:outputText value="#{item.sexocadena()}"/>
+            </h:column>
+            <h:column>
+                <f:facet name="header">
+                    <h:outputText value="Correoapoderado"/>
+                </f:facet>
+                <h:outputText value="#{item.correoapoderado}"/>
+            </h:column>
+            <h:column>
+                <f:facet name="header">
+                    <h:outputText value="Fechanac"/>
+                </f:facet>
+                <h:outputText value="#{item.fechanac}">
+                <f:convertDateTime pattern="MM/dd/yyyy" />
+                </h:outputText>
+            </h:column>
+            <h:column>
+                <f:facet name="header">
+                    <h:outputText value="Apellidos"/>
+                </f:facet>
+                <h:outputText value="#{item.apellidos}"/>
+            </h:column>
+            <h:column>
+                <f:facet name="header">
+                    <h:outputText value="Nombres"/>
+                </f:facet>
+                <h:outputText value="#{item.nombres}"/>
+            </h:column>
+            <h:column>
+                <f:facet name="header">
+                    <h:outputText value="Dni"/>
+                </f:facet>
+                <h:outputText value="#{item.dni}"/>
+            </h:column>
+            <h:column>
+                <f:facet name="header">
+                    <h:outputText value="Direccion"/>
+                </f:facet>
+                <h:outputText value="#{item.direccion}"/>
+            </h:column>
+            <h:column>
+                <f:facet name="header">
+                    <h:outputText value="Apoderado"/>
+                </f:facet>
+                <h:outputText value="#{item.apoderado}"/>
+            </h:column>
+            <h:column>
+                <f:facet name="header">
+                    <h:outputText value="Telefonoapoderado"/>
+                </f:facet>
+                <h:outputText value="#{item.telefonoapoderado}"/>
+            </h:column>
+            <h:column>
+                <f:facet name="header">
+                    <h:outputText value=""/>
+                </f:facet>
+                <b:commandButton look="info" value="Editar" actionListener="#{estudianteBean.seleccionar(item)}"> </b:commandButton>
+            </h:column>
+        </b:dataTable>
+    </h:form>
+</f:view>
+
+        
+        
+        </div>
+
+        
+    </ui:define>
+
+</ui:composition>

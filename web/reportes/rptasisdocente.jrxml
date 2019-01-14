@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="031ed2a6-7616-4cbc-9b7b-d56c2c08d91f">
+	<property name="ireport.zoom" value="2.0"/>
+	<property name="ireport.x" value="234"/>
+	<property name="ireport.y" value="50"/>
+	<parameter name="fecha" class="java.util.Date">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT
+     tbasistenciageneral.`id_asistenciageneral` AS tbasistenciageneral_id_asistenciageneral,
+     tbasistenciageneral.`id_usuario` AS tbasistenciageneral_id_usuario,
+     tbasistenciageneral.`horaentrada` AS tbasistenciageneral_horaentrada,
+     tbasistenciageneral.`horasalida` AS tbasistenciageneral_horasalida,
+     tbasistenciageneral.`falta` AS tbasistenciageneral_falta,
+     tbasistenciageneral.`fecha` AS tbasistenciageneral_fecha,
+     tbusuario.`Id_Usuario` AS tbusuario_Id_Usuario,
+     tbusuario.`Apellidos` AS tbusuario_Apellidos,
+     tbusuario.`Nombres` AS tbusuario_Nombres,
+     tbusuario.`Direccion` AS tbusuario_Direccion,
+     tbusuario.`NumeroDoc` AS tbusuario_NumeroDoc
+FROM
+     `tbasistenciageneral`  INNER JOIN `tbusuario`  ON tbasistenciageneral.`id_usuario` = tbusuario.`Id_Usuario`
+WHERE
+     tbasistenciageneral.`fecha` = $P{fecha}]]>
+	</queryString>
+	<field name="tbasistenciageneral_id_asistenciageneral" class="java.lang.Integer"/>
+	<field name="tbasistenciageneral_id_usuario" class="java.lang.Integer"/>
+	<field name="tbasistenciageneral_horaentrada" class="java.sql.Time"/>
+	<field name="tbasistenciageneral_horasalida" class="java.sql.Time"/>
+	<field name="tbasistenciageneral_falta" class="java.lang.Boolean"/>
+	<field name="tbasistenciageneral_fecha" class="java.sql.Date"/>
+	<field name="tbusuario_Id_Usuario" class="java.lang.Integer"/>
+	<field name="tbusuario_Apellidos" class="java.lang.String"/>
+	<field name="tbusuario_Nombres" class="java.lang.String"/>
+	<field name="tbusuario_Direccion" class="java.lang.String"/>
+	<field name="tbusuario_NumeroDoc" class="java.lang.String"/>
+	<variable name="DATOS" class="java.lang.String">
+		<variableExpression><![CDATA[$F{tbusuario_Apellidos} + " " + $F{tbusuario_Nombres}]]></variableExpression>
+	</variable>
+	<variable name="faltas" class="java.lang.String">
+		<variableExpression><![CDATA[( $F{tbasistenciageneral_falta}? "Si" : "" )]]></variableExpression>
+	</variable>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="72" splitType="Stretch">
+			<staticText>
+				<reportElement x="46" y="5" width="93" height="42" uuid="89253d41-9d96-47dc-b3c4-716895cc2f8a"/>
+				<text><![CDATA[I.E.S. Nuesta Señora Del Perpetuo Socorro]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="172" y="20" width="272" height="27" uuid="14e1eba0-b4ad-465d-a484-5d1606e935e8"/>
+				<textElement>
+					<font size="16" isBold="true" isUnderline="false" isStrikeThrough="false"/>
+				</textElement>
+				<text><![CDATA[Reporte de Asistencia]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="222" y="47" width="20" height="20" uuid="b0f7f7f4-2458-4b4a-ae20-0c92442783b5"/>
+				<text><![CDATA[Día]]></text>
+			</staticText>
+			<textField pattern="EEEEE dd MMMMM yyyy">
+				<reportElement x="389" y="0" width="100" height="20" uuid="77878528-b9e7-4d9d-b1ff-ddfe27c95581"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="242" y="47" width="100" height="20" uuid="56bcf957-8106-4a4d-8d74-fb3f64eb7799"/>
+				<textFieldExpression><![CDATA[$F{tbasistenciageneral_fecha}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="32" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="21" splitType="Stretch">
+			<rectangle>
+				<reportElement x="0" y="1" width="555" height="20" backcolor="#CCCCFF" uuid="b7b482ed-3cae-43be-901c-69a1e58dbfa6"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="0" y="1" width="328" height="20" uuid="c33c2c09-e13d-4214-b45b-d1abd5a59a2b"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[Apellidos]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="328" y="1" width="73" height="20" uuid="9b0ffdfa-92a8-4c44-90bd-a4fc3dc62355"/>
+				<text><![CDATA[Hora Entrada]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="402" y="1" width="73" height="20" uuid="26e66eff-08c4-475e-9a96-0dc7e6f10c1f"/>
+				<text><![CDATA[Hora Salida]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="478" y="1" width="77" height="20" uuid="d5829e3c-fcb3-4a9a-a7df-169e38241e43"/>
+				<text><![CDATA[Falta]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="21" splitType="Stretch">
+			<rectangle>
+				<reportElement x="0" y="1" width="555" height="20" uuid="e5080409-ed6f-4120-bc9a-499d3b275078"/>
+			</rectangle>
+			<textField pattern="h.mm a">
+				<reportElement x="328" y="0" width="73" height="20" uuid="94c15ca8-a254-4abb-b592-ea82368eefa2"/>
+				<textFieldExpression><![CDATA[$F{tbasistenciageneral_horaentrada}]]></textFieldExpression>
+			</textField>
+			<textField pattern="h.mm a">
+				<reportElement x="402" y="0" width="73" height="20" uuid="da964d70-9bc2-4c08-8e71-cdc54ff0b177"/>
+				<textFieldExpression><![CDATA[$F{tbasistenciageneral_horasalida}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="4" y="1" width="324" height="20" uuid="f875aaed-c947-4071-9f54-76dd3e88ac4b"/>
+				<textFieldExpression><![CDATA[$V{DATOS}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="478" y="1" width="77" height="20" uuid="4d4c9ceb-0aab-4323-aff7-1b71cf9ae5b5"/>
+				<textFieldExpression><![CDATA[$V{faltas}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="46" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>

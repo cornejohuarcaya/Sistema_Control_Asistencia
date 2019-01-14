@@ -1,0 +1,94 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                template="./menu/menu.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:b="http://bootsfaces.net/ui"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:define name="content">
+        <div class="container">
+            <b:growl id ="msj" placementFrom="top" show-detail="true"
+                     global-only="false"
+                     show-summary="true" allow-dismiss="true"
+                     animation-enter="animated bounceInDown"
+                     animation-exit="animated flipOutX"
+                     escape="true" />
+
+
+
+            <br/><br/><br/>
+            <f:view>
+
+
+            <h:form>
+                <h1><h:outputText value="Aulas por Año"/></h1>
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="Aula"/>
+                    <b:selectOneMenu  value="#{aulaperiodoBean.aulaperiodoest.id_Aula}" >
+                        <f:selectItems value="#{aulaperiodoBean.lstaula}" var="itemaula" itemLabel="#{itemaula.anio}#{itemaula.seccion}" itemValue="#{itemaula}"/>
+                    </b:selectOneMenu>
+                    <h:outputLabel value="Periodo Estudio:" for="id_PeriodoEstudio" />
+                    <b:selectOneMenu id="id_PeriodoEstudio" value="#{aulaperiodoBean.aulaperiodoest.id_PeriodoEstudio}" title="Id_PeriodoEstudio" >
+                        <f:selectItems value="#{aulaperiodoBean.lstperiodoestudio}" var="periodo"  itemLabel="#{periodo.anio}"  itemValue="#{periodo}"/>
+                    </b:selectOneMenu>
+                    <h:outputLabel value="Observaciones:" for="observaciones" />
+                    <b:inputText id="observaciones" value="#{aulaperiodoBean.aulaperiodoest.observaciones}" title="Observaciones" />
+                    <b:inputText id="id_AulaPeriodo" hidden="lg,md,sm,xs"  value="#{aulaperiodoBean.aulaperiodoest.id_AulaPeriodo}" title="Id_AulaPeriodo" />
+                    
+                    <br/>
+                </h:panelGrid>
+                <b:commandButton  look="primary"   value="Confirmar" actionListener="#{aulaperiodoBean.registraractualziar()}" ></b:commandButton>
+                <b:commandButton look="success" value="Cancelar" actionListener="#{aulaperiodoBean.cancelar()}" ></b:commandButton>
+            </h:form>
+</f:view>
+
+
+
+            <br/><br/>
+
+
+
+
+<f:view>
+            <h:form>
+
+                <b:dataTable value="#{aulaperiodoBean.lista}" responsive="true" var="item">
+
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Id_Aula"/>
+                        </f:facet>
+                        <h:outputText value="#{item.id_Aula.anio} #{item.id_Aula.seccion }" />
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Id_PeriodoEstudio"/>
+                        </f:facet>
+                        <h:outputText value="#{item.id_PeriodoEstudio.anio }"/>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Observaciones"/>
+                        </f:facet>
+                        <h:outputText value="#{item.observaciones}"/>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value=""/>
+                        </f:facet>
+                        <b:commandButton look="primary" value="editar" actionListener="#{aulaperiodoBean.seleccionar(item)}" />
+                    </h:column>
+                </b:dataTable>
+            </h:form>
+
+
+</f:view>
+
+
+        </div>
+
+    </ui:define>
+
+</ui:composition>

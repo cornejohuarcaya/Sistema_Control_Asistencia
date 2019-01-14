@@ -1,0 +1,139 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns="http://www.w3.org/1999/xhtml"
+                template="./menu/menu.xhtml"
+                xmlns:b="http://bootsfaces.net/ui"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:define name="content">
+        <br/>
+        <br/><br/>
+        <div class="container">
+            <b:growl id ="msj" placementFrom="top" show-detail="true"
+                                         global-only="false"
+                                         show-summary="true" allow-dismiss="true"
+                                         animation-enter="animated bounceInDown"
+                                         animation-exit="animated flipOutX"
+                                         escape="true" />
+             
+            <b:panel title="Filtrar horarios" look="success">
+            <b:panel title="Fitrar Asistencia por día" col-lg="4">
+                <h:form>
+                    
+                        <h:outputLabel value="Fecha" /><br/>
+                        <b:dateTimePicker format="DD-MM-YYYY"   value="#{cambiarcurriculaBean.fecha}"  />
+                        <br/>
+                    
+                        <b:commandButton size="lg" update="tabla"  look="primary" offset-md="3"  col-md="4"  value="Filtrar" actionListener="#{cambiarcurriculaBean.filtrarfecha()}"></b:commandButton>
+                </h:form>
+            </b:panel>
+            <b:panel title="Fitrar Asistencia por fecha y hora" col-lg="4">
+                <h:form>
+                    
+                        <h:outputLabel value="Fecha" /><br/>
+                        <b:dateTimePicker format="DD-MM-YYYY"   value="#{cambiarcurriculaBean.fecha}"  />
+                        <br/>
+                        <h:outputLabel value="Desde las" /><br/>
+                        <b:dateTimePicker format="HH:mm:ss"   value="#{cambiarcurriculaBean.horainicial}"  />
+                        <br/>
+                    
+                        <b:commandButton size="lg" update="tabla"  look="primary" offset-md="3"  col-md="4"  value="Filtrar" actionListener="#{cambiarcurriculaBean.filtrarfechahora()}"></b:commandButton>
+                </h:form>
+            </b:panel>
+            <b:panel title="Fitrar Asistencia por rango de hora" col-lg="4">
+                <h:form>
+                    
+                        <h:outputLabel value="Fecha" /><br/>
+                        <b:dateTimePicker format="DD-MM-YYYY"   value="#{cambiarcurriculaBean.fecha}"  />
+                        <br/>
+                        <h:outputLabel value="Hora inicial" /><br/>
+                        <b:dateTimePicker format="HH:mm:ss"   value="#{cambiarcurriculaBean.horainicial}"  />
+                        <br/>
+                    <h:outputLabel value="Hora Final" /><br/>
+                    <b:dateTimePicker format="HH:mm:ss"   value="#{cambiarcurriculaBean.horafinal}"  />
+                        <br/>
+                        <b:commandButton size="lg" update="tabla"  look="primary" offset-md="3"  col-md="4"  value="Filtrar" actionListener="#{cambiarcurriculaBean.filtrarrangohora()}"></b:commandButton>
+                </h:form>
+            </b:panel>
+                </b:panel>
+            <b:panel title="Registrar Curricula" look="primary" >
+                <h:form>
+                    
+                        <h:outputLabel value="Curricula: " /><br/>
+                        <b:inputText  col-lg="8" value="#{cambiarcurriculaBean.curricula}"  />
+                        
+                        
+                        <b:commandButton   look="primary" update="msj tabla" value="Filtrar" actionListener="#{cambiarcurriculaBean.actualizarcurricula()}"></b:commandButton>
+                </h:form>
+            </b:panel>
+
+                
+            
+            <f:view>
+
+               
+ 
+                <h:form id="tabla">
+                    
+                    <b:dataTable value="#{cambiarcurriculaBean.listaasistencia}" searching="false" paginated="false" border="1" var="item">
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="Id_horario"/>
+                            </f:facet>
+                            <h:outputText value="#{item.id_horario.id_AulaPeriodo.id_Aula.anio}#{item.id_horario.id_AulaPeriodo.id_Aula.seccion}-#{item.id_horario.id_AulaPeriodo.id_PeriodoEstudio.anio}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="Id_usuario"/>
+                            </f:facet>
+                            <h:outputText value="#{item.id_usuario.apellidos} #{item.id_usuario.nombres}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="HoraEntrada"/>
+                            </f:facet>
+                            <h:outputText value="#{item.id_horario.horaEntrada }">
+                                <f:convertDateTime pattern="HH:mm:ss" />
+                            </h:outputText>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="Fecha"/>
+                            </f:facet>
+                            <h:outputText value="#{item.fecha}">
+                                <f:convertDateTime pattern="MM/dd/yyyy" />
+                            </h:outputText>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="HoraSalida"/>
+                            </f:facet>
+                            <h:outputText value="#{item.id_horario.horaSalida }">
+                                <f:convertDateTime pattern="HH:mm:ss" />
+                            </h:outputText>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="Curricula"/>
+                            </f:facet>
+                            <h:outputText value="#{item.curricula}"/>
+                        </h:column>
+                       
+                    </b:dataTable>
+                </h:form>
+            </f:view>
+
+            
+
+<br/>
+
+        
+        
+        </div>
+
+        
+    </ui:define>
+
+</ui:composition>

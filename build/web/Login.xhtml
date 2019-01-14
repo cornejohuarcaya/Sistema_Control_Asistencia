@@ -1,0 +1,61 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:b="http://bootsfaces.net/ui">
+    <h:head>
+        <title>I.E.S. N.S.P.S.</title>
+    </h:head>
+    <h:body style="background: darkcyan">
+         <b:growl id ="msj" placementFrom="top" show-detail="true"
+                                         global-only="false"
+                                         show-summary="true" allow-dismiss="true"
+                                         animation-enter="animated bounceInDown"
+                                         animation-exit="animated flipOutX"
+                                         escape="true" />
+         
+        <f:view>
+            
+           
+            <h:form id="reg">
+                <div class="container" style="align-items:  center;">
+                <b:container>
+                    <br/>
+                    <br/>
+                    <b:row>
+                        <b:image value="/reportes/img/insignia.png" width="150" offset-xs="4" col-xs="4"  offset-sm="5" col-sm="2" offset-md="5" col-md="2"/>
+                        
+                    </b:row>
+                    <b:row  >
+                        <h1 align="center" style="font-family: fantasy; color: mintcream ">IES. N.S.P.S.</h1>
+                        
+                    <b:inputText label="Usuario" offset-xs="1" col-xs="10"  offset-sm="4" col-sm="4" offset-md="4" col-md="4" value="#{loguear.usuario}"></b:inputText>
+                    </b:row>
+                    <b:row>
+                    
+                    <b:inputSecret label="Password" offset-xs="1" col-xs="10"  offset-sm="4" col-sm="4" offset-md="4" col-md="4" value="#{loguear.password}" />
+                    </b:row>
+                    <b:row>
+                    
+                        <b:commandButton look="primary" offset-xs="1" col-xs="10"  offset-sm="4" col-sm="4" offset-md="4" col-md="4"  value="Ingresar" action="#{loguear.loguear()}"/>
+                    </b:row>
+                    
+                    <br/>
+                    <p style="text-align:center;"><b:link  style="color: #ffffff;"  href="#" value=" Copyright Ⓒ 2018 "/> </p>
+                    
+                    <p style="text-align:center;">
+                    <b:link style="color: #ffffff;" href="#"  value="Chars Canales "/> 
+                        <b:link  style="color: #ffffff;"  href="#" value=", Carmen Atoccsa"/>
+                        <b:link  style="color: #ffffff;"  href="#" value=", Erick Cornejo"/>
+                    </p>
+                    
+                    
+                </b:container>
+                </div>
+            </h:form>
+        </f:view>
+
+    </h:body>
+</html>
+

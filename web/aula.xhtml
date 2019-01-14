@@ -1,0 +1,83 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns="http://www.w3.org/1999/xhtml"
+                template="./menu/menu.xhtml"
+                xmlns:b="http://bootsfaces.net/ui"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:define name="content">
+        <div class="container">
+            <b:growl id ="msj" placementFrom="top" show-detail="true"
+                                         global-only="false"
+                                         show-summary="true" allow-dismiss="true"
+                                         animation-enter="animated bounceInDown"
+                                         animation-exit="animated flipOutX"
+                                         escape="true" />
+            <f:view>
+
+<br/><br/><br/>
+                <b:row>
+                    <b:column col-lg="4">
+                    
+                    <h1><h:outputText value="Mantenimiento de Aula"/></h1>
+                    <h:form id="reg"> 
+                       <h:panelGrid columns="2">
+                        
+                        
+                        <h:outputLabel value="Anio:" for="anio" />
+                        <b:inputText id="anio" value="#{aulaBean.aula.anio}" title="Anio" />
+                        <h:outputLabel value="Seccion:" for="seccion" />
+                        <b:inputText id="seccion" value="#{aulaBean.aula.seccion}" title="Seccion" />
+                        <h:outputLabel value="Observaciones:" for="observaciones" />
+                        <b:inputText id="observaciones" value="#{aulaBean.aula.observaciones}" title="Observaciones" />
+                        <b:inputText id="id_aula" hidden="lg,md,sm,xs" value="#{aulaBean.aula.id_aula}" title="Id_aula" />
+                    </h:panelGrid>
+                        <b:commandButton  look="primary"   value="Confirmar" actionListener="#{aulaBean.registraractualziar()}" update="reg tabla msj" ></b:commandButton>
+                    <b:commandButton look="success" value="Cancelar" actionListener="#{aulaBean.cancelar()}"  update="reg"  ></b:commandButton>
+                </h:form >
+                    </b:column>
+                    
+                    <b:column col-lg="8" col-sm="12">
+                        <h:form id="tabla">
+        
+        <b:dataTable value="#{aulaBean.lista}" responsive="true" var="item">
+            
+            <h:column>
+                <f:facet name="header">
+                    <h:outputText value="Anio"/>
+                </f:facet>
+                <h:outputText value="#{item.anio}"/>
+            </h:column>
+            <h:column>
+                <f:facet name="header">
+                    <h:outputText value="Seccion"/>
+                </f:facet>
+                <h:outputText value="#{item.seccion}"/>
+            </h:column>
+            <h:column>
+                <f:facet name="header">
+                    <h:outputText value="Observaciones"/>
+                </f:facet>
+                <h:outputText value="#{item.observaciones}"/>
+            </h:column>
+            <h:column>
+                <f:facet name="header">
+                    <h:outputText value="Id_aula"/>
+                </f:facet>
+                <b:commandButton look="info" value="Editar" update="reg" actionListener="#{aulaBean.seleccionar(item)}"> </b:commandButton>
+            </h:column>
+        </b:dataTable>
+    </h:form>
+                        
+                    </b:column>
+                    </b:row>
+
+            </f:view>
+
+   </div>
+        
+    </ui:define>
+
+</ui:composition>

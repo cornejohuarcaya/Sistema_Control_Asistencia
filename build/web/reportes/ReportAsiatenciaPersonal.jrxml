@@ -1,0 +1,239 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="fb3a0dba-0c7d-42a1-866b-853436619f26">
+	<property name="ireport.zoom" value="2.0"/>
+	<property name="ireport.x" value="6"/>
+	<property name="ireport.y" value="98"/>
+	<parameter name="dni" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="idperiodo" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT
+     tbasistenciapersonal.`Id_AsistenciaPersonal` AS tbasistenciapersonal_Id_AsistenciaPersonal,
+     tbasistenciapersonal.`Fecha` AS tbasistenciapersonal_Fecha,
+     tbasistenciapersonal.`HoraEntrada` AS tbasistenciapersonal_HoraEntrada,
+     tbasistenciapersonal.`HoraSalida` AS tbasistenciapersonal_HoraSalida,
+     tbasistenciapersonal.`Falta` AS tbasistenciapersonal_Falta,
+     tbasistenciapersonal.`Tardanza` AS tbasistenciapersonal_Tardanza,
+     tbusuario.`Id_Usuario` AS tbusuario_Id_Usuario,
+     tbusuario.`Apellidos` AS tbusuario_Apellidos,
+     tbusuario.`Nombres` AS tbusuario_Nombres,
+     tbusuario.`NumeroDoc` AS tbusuario_NumeroDoc,
+     tbusuario.`Telefono` AS tbusuario_Telefono,
+     tbusuario.`Email` AS tbusuario_Email,
+     tbhorario.`Id_Horario` AS tbhorario_Id_Horario,
+     tbhorario.`Id_AulaPeriodo` AS tbhorario_Id_AulaPeriodo,
+     tbhorario.`Dia` AS tbhorario_Dia,
+     tbhorario.`HoraEntrada` AS tbhorario_HoraEntrada,
+     tbhorario.`HoraSalida` AS tbhorario_HoraSalida,
+     tbtipoactividad.`Actividad` AS tbtipoactividad_Actividad,
+     tbusuario.`Direccion` AS tbusuario_Direccion,
+     tbaula.`Anio` AS tbaula_Anio,
+     tbaula.`Seccion` AS tbaula_Seccion,
+     tbperiodoestudio.`Id_PeriodoEstudio` AS tbperiodoestudio_Id_PeriodoEstudio,
+     tbperiodoestudio.`Anio` AS tbperiodoestudio_Anio
+FROM
+     `tbusuario` tbusuario INNER JOIN `tbasistenciapersonal` tbasistenciapersonal ON tbusuario.`Id_Usuario` = tbasistenciapersonal.`Id_Usuario`
+     INNER JOIN `tbhorario` tbhorario ON tbusuario.`Id_Usuario` = tbhorario.`Id_Usuario`
+     AND tbhorario.`Id_Horario` = tbasistenciapersonal.`Id_Horario`
+     INNER JOIN `tbtipoactividad` tbtipoactividad ON tbhorario.`Id_TipoActividad` = tbtipoactividad.`Id_TipoActividad`
+     INNER JOIN `tbaulaperiodo` tbaulaperiodo ON tbhorario.`Id_AulaPeriodo` = tbaulaperiodo.`Id_AulaPeriodo`
+     INNER JOIN `tbaula` tbaula ON tbaulaperiodo.`Id_Aula` = tbaula.`Id_Aula`
+     INNER JOIN `tbperiodoestudio` tbperiodoestudio ON tbaulaperiodo.`Id_PeriodoEstudio` = tbperiodoestudio.`Id_PeriodoEstudio`
+WHERE
+     tbusuario.`NumeroDoc` = $P{dni}
+     and tbperiodoestudio.`Id_PeriodoEstudio` = $P{idperiodo}
+ORDER BY
+     tbasistenciapersonal.`Fecha` ASC,
+     tbasistenciapersonal.`HoraEntrada` ASC]]>
+	</queryString>
+	<field name="tbasistenciapersonal_Id_AsistenciaPersonal" class="java.lang.Integer"/>
+	<field name="tbasistenciapersonal_Fecha" class="java.sql.Date"/>
+	<field name="tbasistenciapersonal_HoraEntrada" class="java.sql.Time"/>
+	<field name="tbasistenciapersonal_HoraSalida" class="java.sql.Time"/>
+	<field name="tbasistenciapersonal_Falta" class="java.lang.Boolean"/>
+	<field name="tbasistenciapersonal_Tardanza" class="java.lang.Boolean"/>
+	<field name="tbusuario_Id_Usuario" class="java.lang.Integer"/>
+	<field name="tbusuario_Apellidos" class="java.lang.String"/>
+	<field name="tbusuario_Nombres" class="java.lang.String"/>
+	<field name="tbusuario_NumeroDoc" class="java.lang.String"/>
+	<field name="tbusuario_Telefono" class="java.lang.String"/>
+	<field name="tbusuario_Email" class="java.lang.String"/>
+	<field name="tbhorario_Id_Horario" class="java.lang.Integer"/>
+	<field name="tbhorario_Id_AulaPeriodo" class="java.lang.Integer"/>
+	<field name="tbhorario_Dia" class="java.lang.String"/>
+	<field name="tbhorario_HoraEntrada" class="java.sql.Time"/>
+	<field name="tbhorario_HoraSalida" class="java.sql.Time"/>
+	<field name="tbtipoactividad_Actividad" class="java.lang.String"/>
+	<field name="tbusuario_Direccion" class="java.lang.String"/>
+	<field name="tbaula_Anio" class="java.lang.String"/>
+	<field name="tbaula_Seccion" class="java.lang.String"/>
+	<field name="tbperiodoestudio_Id_PeriodoEstudio" class="java.lang.Integer"/>
+	<field name="tbperiodoestudio_Anio" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="129" splitType="Stretch">
+			<staticText>
+				<reportElement x="145" y="17" width="272" height="27" uuid="6ea7578a-0186-4501-bf04-71b39a4c94be"/>
+				<textElement>
+					<font size="16" isBold="true" isUnderline="false" isStrikeThrough="false"/>
+				</textElement>
+				<text><![CDATA[Reporte de Asistencia de Docente]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="48" y="2" width="93" height="42" uuid="d0140c23-af8b-42f9-82cd-700589f5dbe2"/>
+				<text><![CDATA[I.E.S. Nuesta Señora Del Perpetuo Socorro]]></text>
+			</staticText>
+			<image>
+				<reportElement x="3" y="2" width="45" height="42" uuid="147e8f5b-1267-495a-8cec-def7c2824af4"/>
+				<imageExpression><![CDATA["E:\\F\\APP_asistenciaJAP\\web\\reportes\\img\\insignia.png"]]></imageExpression>
+			</image>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="455" y="2" width="100" height="20" uuid="edb51fe9-b6d9-40b7-8e0b-92f7e84f1316"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="48" y="65" width="255" height="20" uuid="669de743-11df-41cd-b65a-4ce8ee15553c"/>
+				<textFieldExpression><![CDATA[$F{tbusuario_Apellidos}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="48" y="85" width="255" height="20" uuid="00e91f76-c12a-4ea6-8aca-f3a2f80a0267"/>
+				<textFieldExpression><![CDATA[$F{tbusuario_Nombres}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="351" y="105" width="204" height="20" uuid="da32a349-86b8-4e9e-b6a2-5e4051d591dc"/>
+				<textFieldExpression><![CDATA[$F{tbusuario_Email}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="48" y="105" width="255" height="20" uuid="ef1b1310-ce87-4464-a7fe-25e7aa38e8f3"/>
+				<textFieldExpression><![CDATA[$F{tbusuario_Direccion}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="417" y="65" width="100" height="20" uuid="aab5ec95-1e47-4fb9-bf76-6fe07c2a2566"/>
+				<textFieldExpression><![CDATA[$F{tbusuario_NumeroDoc}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="368" y="65" width="51" height="20" uuid="6d23b406-e927-49a0-b678-7c030106f567"/>
+				<text><![CDATA[N° Doc]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="303" y="105" width="48" height="20" uuid="2652c75b-a9cb-42a0-b7fc-6e988c24ed78"/>
+				<text><![CDATA[Correo]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="65" width="48" height="20" uuid="ef4d40ad-c90b-47dd-97af-9364117b2094"/>
+				<text><![CDATA[Apellidos:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="85" width="48" height="20" uuid="52dfd6b2-05e4-46e0-a5d3-157c9d64319d"/>
+				<text><![CDATA[Nombres:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="105" width="48" height="20" uuid="068ba06c-31c3-42f5-a2b7-08078faef00e"/>
+				<text><![CDATA[Dirección:]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="8" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="21" splitType="Stretch">
+			<rectangle>
+				<reportElement x="0" y="1" width="555" height="20" backcolor="#CCCCFF" uuid="a373d1ce-35e5-4e8f-a0f3-4cf78c71d84d"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="3" y="1" width="45" height="20" uuid="ee6722fe-ad85-4dc5-896f-e23a7badf7c2"/>
+				<text><![CDATA[Fecha]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="48" y="1" width="100" height="20" uuid="dc8bbfab-8d97-492b-8d41-2ecad87125f2"/>
+				<text><![CDATA[Día]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="148" y="1" width="84" height="20" uuid="75b49212-3e01-4d40-8dca-6c6f14012955"/>
+				<text><![CDATA[Hora Establecida]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="233" y="1" width="55" height="20" uuid="f52596fc-a03a-4c79-8e52-37d001a0383f"/>
+				<text><![CDATA[Hora Entrada]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="289" y="1" width="30" height="20" uuid="81c0311f-e1b2-4d2d-8b35-7b43a94fa80d"/>
+				<text><![CDATA[Año]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="479" y="1" width="48" height="20" uuid="11966ec8-a581-4c89-9e30-c568310f6535"/>
+				<text><![CDATA[Tardanza]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="527" y="1" width="26" height="20" uuid="e5f199d0-25a3-42eb-866b-02ecb1145c19"/>
+				<text><![CDATA[Falta]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="319" y="1" width="160" height="20" uuid="02ec70ac-a922-4f85-8814-666e8b4a939b"/>
+				<text><![CDATA[Actividad]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="21" splitType="Stretch">
+			<rectangle>
+				<reportElement x="0" y="1" width="555" height="20" uuid="b66b8b39-3e3f-49b0-8181-a0d7484dc625"/>
+			</rectangle>
+			<textField>
+				<reportElement x="3" y="1" width="45" height="20" uuid="c1d58720-7fa3-458e-97e5-2f4bb9c6ba47"/>
+				<textFieldExpression><![CDATA[$F{tbasistenciapersonal_Fecha}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="48" y="1" width="100" height="20" uuid="0e846ff7-fd2e-436a-9f6b-b7c5cfe85481"/>
+				<textFieldExpression><![CDATA[$F{tbhorario_Dia}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="148" y="1" width="84" height="20" uuid="e626bc18-4d88-457c-80fc-6ab8109220bb"/>
+				<textFieldExpression><![CDATA[$F{tbhorario_HoraEntrada}.getHours()+":"+
+$F{tbhorario_HoraEntrada}.getMinutes()+":"+
+$F{tbhorario_HoraEntrada}.getSeconds()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="233" y="1" width="55" height="20" uuid="843b7362-06da-45cb-a1b4-7c5b63d3235c"/>
+				<textFieldExpression><![CDATA[$F{tbasistenciapersonal_HoraEntrada}.getHours()+":"+
+$F{tbasistenciapersonal_HoraEntrada}.getMinutes()+":"+
+$F{tbasistenciapersonal_HoraEntrada}.getSeconds()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="289" y="1" width="14" height="20" uuid="7c6277ad-9b59-468b-9a4a-e2469da2baea"/>
+				<textFieldExpression><![CDATA[$F{tbaula_Anio}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="303" y="1" width="16" height="20" uuid="6c5a8f34-cdda-42dc-8beb-7a12e4c7e42c"/>
+				<textFieldExpression><![CDATA[$F{tbaula_Seccion}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="479" y="1" width="48" height="20" uuid="ea4bb385-e05e-421e-9444-ae859edc4470"/>
+				<textFieldExpression><![CDATA[$F{tbasistenciapersonal_Tardanza}?"SI":""]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="527" y="1" width="26" height="20" uuid="39a2ba3b-7ba7-43a9-88c2-ae0b2d27afa8"/>
+				<textFieldExpression><![CDATA[$F{tbasistenciapersonal_Falta}?"SI":""]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="319" y="1" width="160" height="20" uuid="5580b972-2fc5-475a-ac32-56ccd6cd5e1d"/>
+				<textFieldExpression><![CDATA[$F{tbtipoactividad_Actividad}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>

@@ -1,0 +1,160 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                template="./menu/menu.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:b="http://bootsfaces.net/ui"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:define name="content">
+        <div class="container">
+            <b:growl id ="msj" placementFrom="top" show-detail="true"
+                                         global-only="false"
+                                         show-summary="true" allow-dismiss="true"
+                                         animation-enter="animated bounceInDown"
+                                         animation-exit="animated flipOutX"
+                                         escape="true" />
+        
+            <f:view>
+
+<br/><br/><br/>
+                <h:form>
+                    <h1><h:outputText value="Periodo de Estudio"/></h1>
+                    <h:panelGrid columns="2">
+                        
+                        
+                        <h:outputLabel value="Anio:" for="anio" />
+                        <b:inputText id="anio" value="#{periodoBean.periodoestudio.anio}" title="Anio" />
+                        <h:outputLabel value="Observaciones:" for="observaciones" />
+                        <b:inputText id="observaciones" value="#{periodoBean.periodoestudio.observaciones}" title="Observaciones" />
+                        <h:outputLabel value="Horarioinicioclase:" for="horarioinicioclase" />
+                        <b:inputText id="horarioinicioclase" value="#{periodoBean.periodoestudio.horarioinicioclase}" title="Horarioinicioclase" >
+                            <f:convertDateTime pattern="HH:mm:ss" />
+                        </b:inputText>
+                        <h:outputLabel value="Horarioiniciosalida:" for="horarioiniciosalida" />
+                        <b:inputText id="horarioiniciosalida" value="#{periodoBean.periodoestudio.horarioiniciosalida}" title="Horarioiniciosalida" >
+                            <f:convertDateTime pattern="HH:mm:ss" />
+                        </b:inputText>
+                        <h:outputLabel value="Fechainicioescolar:" for="fechainicioescolar" />
+                        <b:inputText id="fechainicioescolar" value="#{periodoBean.periodoestudio.fechainicioescolar}" title="Fechainicioescolar" >
+                            <f:convertDateTime pattern="MM/dd/yyyy" />
+                        </b:inputText>
+                        <h:outputLabel value="Fechasalidaescolar:" for="fechasalidaescolar" />
+                        <b:inputText id="fechasalidaescolar" value="#{periodoBean.periodoestudio.fechasalidaescolar}" title="Fechasalidaescolar" >
+                            <f:convertDateTime pattern="MM/dd/yyyy" />
+                        </b:inputText>
+                        <h:outputLabel value="Activo:" for="activo" />
+                        <b:selectOneMenu id="activo" value="#{periodoBean.periodoestudio.activo}" >
+                            <f:selectItem itemValue="#{periodoBean.activo}" itemLabel="Activo" ></f:selectItem>
+                            <f:selectItem itemValue="#{periodoBean.inactivo}" itemLabel="Bloqueado" ></f:selectItem>
+                        </b:selectOneMenu>
+                        <h:outputLabel value="Fecharealinicioescolar:" for="fecharealinicioescolar" />
+                        <b:inputText id="fecharealinicioescolar" value="#{periodoBean.periodoestudio.fecharealinicioescolar}" title="Fecharealinicioescolar" >
+                            <f:convertDateTime pattern="MM/dd/yyyy" />
+                        </b:inputText>
+                        <h:outputLabel value="Fecharealsalidaescolar:" for="fecharealsalidaescolar" />
+                        <b:inputText id="fecharealsalidaescolar" value="#{periodoBean.periodoestudio.fecharealsalidaescolar}" title="Fecharealsalidaescolar" >
+                            <f:convertDateTime pattern="MM/dd/yyyy" />
+                        </b:inputText>
+                        <b:inputText id="id_periodoestudio" hidden="lg,md,sm,xs" value="#{periodoBean.periodoestudio.id_periodoestudio}" title="Id_periodoestudio" />
+                        
+                    </h:panelGrid>
+                     <b:commandButton  look="primary"   value="Confirmar" actionListener="#{periodoBean.registraractualziar()}" ></b:commandButton>
+                    <b:commandButton look="success" value="Cancelar" actionListener="#{periodoBean.cancelar()}" ></b:commandButton>
+                </h:form>
+            </f:view>
+
+
+<br/>
+<f:view>
+
+
+    <h:form>
+        
+        <b:dataTable value="#{periodoBean.lista}" responsive="true" var="item">
+            <h:column>
+                <f:facet name="header">
+                    <h:outputText value="Anio"/>
+                </f:facet>
+                <h:outputText value="#{item.anio}"/>
+            </h:column>
+            <h:column>
+                <f:facet name="header">
+                    <h:outputText value="Observaciones"/>
+                </f:facet>
+                <h:outputText value="#{item.observaciones}"/>
+            </h:column>
+            <h:column>
+                <f:facet name="header">
+                    <h:outputText value="Horarioinicioclase"/>
+                </f:facet>
+                <h:outputText value="#{item.horarioinicioclase}">
+                    <f:convertDateTime pattern="HH:mm:ss" />
+                </h:outputText>
+            </h:column>
+            <h:column>
+                <f:facet name="header">
+                    <h:outputText value="Horarioiniciosalida"/>
+                </f:facet>
+                <h:outputText value="#{item.horarioiniciosalida}">
+                    <f:convertDateTime pattern="HH:mm:ss" />
+                </h:outputText>
+            </h:column>
+            <h:column>
+                <f:facet name="header">
+                    <h:outputText value="Fechainicioescolar"/>
+                </f:facet>
+                <h:outputText value="#{item.fechainicioescolar}">
+                    <f:convertDateTime pattern="MM/dd/yyyy" />
+                </h:outputText>
+            </h:column>
+            <h:column>
+                <f:facet name="header">
+                    <h:outputText value="Fechasalidaescolar"/>
+                </f:facet>
+                <h:outputText value="#{item.fechasalidaescolar}">
+                    <f:convertDateTime pattern="MM/dd/yyyy " />
+                </h:outputText>
+            </h:column>
+            <h:column>
+                <f:facet name="header">
+                    <h:outputText value="Activo"/>
+                </f:facet>
+                <h:outputText value="#{item.activo}"/>
+            </h:column>
+            <h:column>
+                <f:facet name="header">
+                    <h:outputText value="Fecharealinicioescolar"/>
+                </f:facet>
+                <h:outputText value="#{item.fecharealinicioescolar}">
+                    <f:convertDateTime pattern="MM/dd/yyyy" />
+                </h:outputText>
+            </h:column>
+            <h:column>
+                <f:facet name="header">
+                    <h:outputText value="Fecharealsalidaescolar"/>
+                </f:facet>
+                <h:outputText value="#{item.fecharealsalidaescolar}">
+                    <f:convertDateTime pattern="MM/dd/yyyy" />
+                </h:outputText>
+            </h:column>
+            <h:column>
+                <f:facet name="header">
+                    <h:outputText value="Id_periodoestudio"/>
+                </f:facet>
+                <b:commandButton look="primary" value="editar" actionListener="#{periodoBean.seleccionar(item)}" />
+            </h:column>
+        </b:dataTable>
+        
+    </h:form>
+</f:view>
+
+
+
+        
+        </div>
+        
+    </ui:define>
+
+</ui:composition>

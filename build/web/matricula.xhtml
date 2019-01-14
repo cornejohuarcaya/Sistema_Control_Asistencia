@@ -1,0 +1,151 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                template="./menu/menu.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:b="http://bootsfaces.net/ui"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:define name="content">
+        <div class="container">
+            <b:growl id ="msj" placementFrom="top" show-detail="true"
+                     global-only="false"
+                     show-summary="true" allow-dismiss="true"
+                     animation-enter="animated bounceInDown"
+                     animation-exit="animated flipOutX"
+                     escape="true" />
+
+
+
+            <br/><br/><br/>
+            
+            <b:row contentDisabled="" >
+                <b:column col-lg="8"  col-md="8">
+                    <f:view>
+
+
+                        <h:form id="tablaaula">
+                            
+                            <b:dataTable value="#{matriculaBean.listaulaperiodo}" page-length-menu="3, 5, 10, 25, 100, 200" responsive="true"  var="item2">
+                                
+                                <h:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Id_AulaPeriodo"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item2.id_Aula.anio} #{item2.id_Aula.seccion} #{item2.id_PeriodoEstudio.anio}"/>
+                                </h:column>
+                                <h:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Observaciones"/>
+                                    </f:facet>
+                                    <b:commandButton value="Seleccionar" update="reg" look="success" size="xs" actionListener="#{matriculaBean.matricula.setId_AulaPeriodo(item2)}" />
+                                </h:column>
+                            </b:dataTable>
+                        </h:form>
+                    </f:view>
+<f:view>
+                        <div>
+                    <h:form id="tablaestudiante">
+                        
+                        <b:dataTable value="#{matriculaBean.listestudiante}"  page-length-menu="3,5, 10, 25, 100, 200" responsive="true" var="item">
+                            <h:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Datos"/>
+                                </f:facet>
+                                <h:outputText value="#{item.apellidos} #{item.nombres}"/>
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Dni"/>
+                                </f:facet>
+                                <h:outputText value="#{item.dni}"/>
+                            </h:column>
+                            
+                            
+                            <h:column>
+                                <f:facet name="header">
+                                    <h:outputText value=""/>
+                                </f:facet>
+                                <b:commandButton value="Seleccionar" update="reg" size="xs" look="info" actionListener="#{matriculaBean.matricula.setId_Estudiante(item)}" />
+                            </h:column>
+                        </b:dataTable>
+                    </h:form>
+                        </div>
+</f:view>
+                </b:column>  
+                <b:column col-lg="4" col-md="4">
+                    <f:view>
+
+
+                        <h:form id="reg">
+                            <h1><h:outputText value="Matrícula"/></h1>
+                            <h:panelGrid columns="2">
+                                <h:outputLabel value="Estudiante" for="id_Estudiante" />
+                                <b:inputText id="id_Estudiante" value="#{matriculaBean.matricula.id_Estudiante.apellidos} #{matriculaBean.matricula.id_Estudiante.nombres} " title="Id_Estudiante" readonly="true" />
+                                <h:outputLabel value="DNI"  />
+                                <b:inputText id="Dni" value="#{matriculaBean.matricula.id_Estudiante.dni}" readonly="true" />
+                                    
+                                <h:outputLabel value="Aula" for="id_AulaPeriodo" />
+                                <b:inputText id="id_AulaPeriodo" value="#{matriculaBean.matricula.id_AulaPeriodo.id_Aula.anio}#{matriculaBean.matricula.id_AulaPeriodo.id_Aula.seccion} #{matriculaBean.matricula.id_AulaPeriodo.id_PeriodoEstudio.anio}" title="Id_AulaPeriodo" readonly="true" />
+                                   
+                                <h:outputLabel value="Detalle:" for="detalle" />
+                                <b:inputTextarea id="detalle" value="#{matriculaBean.matricula.detalle}" title="Detalle" />
+                                <h:outputLabel value="Estado" for="" />
+                                <b:selectOneMenu id="estado" value="#{matriculaBean.matricula.activo}" title="Detalle" >
+                                    <f:selectItem itemValue="#{matriculaBean.inactivo}" itemLabel="Inactivo"></f:selectItem>
+                                    <f:selectItem itemValue="#{matriculaBean.activo}" itemLabel="Activo"></f:selectItem>
+                                </b:selectOneMenu>
+                                
+                                <b:inputText id="id" hidden="lg,md,sm,xs" value="#{matriculaBean.matricula.id}" title="Id" />
+                            </h:panelGrid>
+                            <b:commandButton value="Confirmar" look="primary" actionListener="#{matriculaBean.registraractualziar()}" update="reg msj" />
+                            <b:commandButton value="Cancelar" look="success" actionListener="#{matriculaBean.cancelar()}" update="reg" />
+                        </h:form>
+                    </f:view>
+
+                </b:column>
+            </b:row>
+            
+            <h:form>
+                <b:commandButton look="warning" value="Listar Matriculas" update="tablaprincipal" actionListener="#{matriculaBean.listar()}" />
+                             </h:form>
+            <f:view>
+                
+
+                <h:form id="tablaprincipal">
+                    <h1><h:outputText value="Lista de Matriculas"/></h1>
+                    <b:dataTable value="#{matriculaBean.list}" responsive="true" var="item">
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="Id_Estudiante"/>
+                            </f:facet>
+                            <h:outputText value="#{item.id_Estudiante.apellidos} #{item.id_Estudiante.nombres} "/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="Id_AulaPeriodo"/>
+                            </f:facet>
+                            <h:outputText value="#{item.id_AulaPeriodo.id_Aula.anio}#{item.id_AulaPeriodo.id_Aula.seccion}-#{item.id_AulaPeriodo.id_PeriodoEstudio.anio}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="Detalle"/>
+                            </f:facet>
+                            <h:outputText value="#{item.detalle}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value=""/>
+                            </f:facet>
+                            <b:commandButton value="Modificar" look="warning" actionListener="#{matriculaBean.seleccionar(item)}" update="reg" />
+                        </h:column>
+                    </b:dataTable>
+                </h:form>
+            </f:view>
+
+        </div>
+
+    </ui:define>
+
+</ui:composition>

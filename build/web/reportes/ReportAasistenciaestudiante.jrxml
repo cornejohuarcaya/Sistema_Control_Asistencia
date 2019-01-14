@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="a34a9f0f-407f-4b5f-9aa9-d9c8e2ebbbe5">
+	<property name="ireport.zoom" value="1.3310000000000004"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="dni" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="idauulaperiodo" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT
+     tbasistenciaestudiante.`Id_AsistenciaEstudiante` AS tbasistenciaestudiante_Id_AsistenciaEstudiante,
+     tbasistenciaestudiante.`Fecha` AS tbasistenciaestudiante_Fecha,
+     tbasistenciaestudiante.`HoraEntrada` AS tbasistenciaestudiante_HoraEntrada,
+     tbasistenciaestudiante.`Falta` AS tbasistenciaestudiante_Falta,
+     tbasistenciaestudiante.`Tardanza` AS tbasistenciaestudiante_Tardanza,
+     tbasistenciaestudiante.`Incidente` AS tbasistenciaestudiante_Incidente,
+     tbestudianteaulaperiodo.`Id_EstudianteAulaPeriodo` AS tbestudianteaulaperiodo_Id_EstudianteAulaPeriodo,
+     tbestudiante.`Id_Estudiante` AS tbestudiante_Id_Estudiante,
+     tbestudiante.`Apellidos` AS tbestudiante_Apellidos,
+     tbestudiante.`Nombres` AS tbestudiante_Nombres,
+     tbestudiante.`DNI` AS tbestudiante_DNI,
+     tbestudiante.`CorreoApoderado` AS tbestudiante_CorreoApoderado,
+     tbestudiante.`FechaNac` AS tbestudiante_FechaNac,
+     tbestudiante.`Direccion` AS tbestudiante_Direccion,
+     tbestudiante.`Apoderado` AS tbestudiante_Apoderado,
+     tbestudiante.`TelefonoApoderado` AS tbestudiante_TelefonoApoderado,
+     tbestudianteaulaperiodo.`Id_AulaPeriodo` AS tbestudianteaulaperiodo_Id_AulaPeriodo
+FROM
+     `tbestudianteaulaperiodo` tbestudianteaulaperiodo INNER JOIN `tbasistenciaestudiante` tbasistenciaestudiante ON tbestudianteaulaperiodo.`Id_EstudianteAulaPeriodo` = tbasistenciaestudiante.`Id_EstudianteAulaPeriodo`
+     INNER JOIN `tbestudiante` tbestudiante ON tbestudianteaulaperiodo.`Id_Estudiante` = tbestudiante.`Id_Estudiante`
+WHERE
+     tbestudiante.`DNI` = $P{dni}
+ AND tbestudianteaulaperiodo.`Id_AulaPeriodo` = $P{idauulaperiodo}
+ORDER BY
+     tbasistenciaestudiante.`Fecha` ASC]]>
+	</queryString>
+	<field name="tbasistenciaestudiante_Id_AsistenciaEstudiante" class="java.lang.Integer"/>
+	<field name="tbasistenciaestudiante_Fecha" class="java.sql.Date"/>
+	<field name="tbasistenciaestudiante_HoraEntrada" class="java.sql.Time"/>
+	<field name="tbasistenciaestudiante_Falta" class="java.lang.Boolean"/>
+	<field name="tbasistenciaestudiante_Tardanza" class="java.lang.Boolean"/>
+	<field name="tbasistenciaestudiante_Incidente" class="java.lang.Boolean"/>
+	<field name="tbestudianteaulaperiodo_Id_EstudianteAulaPeriodo" class="java.lang.Integer"/>
+	<field name="tbestudiante_Id_Estudiante" class="java.lang.Integer"/>
+	<field name="tbestudiante_Apellidos" class="java.lang.String"/>
+	<field name="tbestudiante_Nombres" class="java.lang.String"/>
+	<field name="tbestudiante_DNI" class="java.lang.String"/>
+	<field name="tbestudiante_CorreoApoderado" class="java.lang.String"/>
+	<field name="tbestudiante_FechaNac" class="java.sql.Date"/>
+	<field name="tbestudiante_Direccion" class="java.lang.String"/>
+	<field name="tbestudiante_Apoderado" class="java.lang.String"/>
+	<field name="tbestudiante_TelefonoApoderado" class="java.lang.String"/>
+	<field name="tbestudianteaulaperiodo_Id_AulaPeriodo" class="java.lang.Integer"/>
+	<variable name="tbestudiante_Apellidos_1" class="java.lang.Integer" resetType="Page" calculation="Count">
+		<variableExpression><![CDATA[$F{tbestudiante_Apellidos}]]></variableExpression>
+	</variable>
+	<variable name="tbestudiante_Apellidos_2" class="java.lang.Integer" resetType="Page" calculation="DistinctCount">
+		<variableExpression><![CDATA[$F{tbestudiante_Apellidos}]]></variableExpression>
+	</variable>
+	<variable name="totalfaltas" class="java.lang.Integer" calculation="Count">
+		<variableExpression><![CDATA[($F{tbasistenciaestudiante_Falta} ? $V{totalfaltas}.intValue()+1:$V{totalfaltas}.intValue()+1 )]]></variableExpression>
+		<initialValueExpression><![CDATA[]]></initialValueExpression>
+	</variable>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="55" splitType="Stretch">
+			<staticText>
+				<reportElement x="142" y="15" width="272" height="27" uuid="9ae63121-5108-49ac-afef-6370d9e2fa70"/>
+				<textElement>
+					<font size="16" isBold="true" isUnderline="false" isStrikeThrough="false"/>
+				</textElement>
+				<text><![CDATA[Reporte de Asistencia de Alumno]]></text>
+			</staticText>
+			<textField pattern="EEEEE dd MMMMM yyyy">
+				<reportElement x="455" y="0" width="100" height="20" uuid="9b437be0-3244-4261-8df5-3537106082c5"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<image>
+				<reportElement x="0" y="0" width="45" height="42" uuid="aff3327b-bb6e-4252-9034-0a5a8c8e1b04"/>
+				<imageExpression><![CDATA["E:\\F\\APP_asistenciaJAP\\web\\reportes\\img\\insignia.png"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="45" y="0" width="93" height="42" uuid="bf0f1a3d-58d3-43c3-8baf-71e953ba0a22"/>
+				<text><![CDATA[I.E.S. Nuesta Señora Del Perpetuo Socorro]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="62" splitType="Stretch">
+			<textField>
+				<reportElement x="60" y="0" width="276" height="20" uuid="94f0485f-84a1-49f0-88cd-94dee0bdb1b5"/>
+				<textFieldExpression><![CDATA[$F{tbestudiante_Apellidos}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="60" y="20" width="276" height="20" uuid="f9345c59-c953-4bc4-ba56-cc36fa4a29a8"/>
+				<textFieldExpression><![CDATA[$F{tbestudiante_Nombres}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="455" y="0" width="100" height="20" uuid="a17e578c-e84e-48fe-9ff2-5c703386365d"/>
+				<textFieldExpression><![CDATA[$F{tbestudiante_DNI}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="455" y="20" width="100" height="20" uuid="3a022c70-e5bd-4bd1-b3d1-05e8858c9d71"/>
+				<textFieldExpression><![CDATA[$F{tbestudiante_FechaNac}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="60" y="40" width="276" height="20" uuid="af47ef75-83b2-47c4-9801-3ac19da390c4"/>
+				<textFieldExpression><![CDATA[$F{tbestudiante_Direccion}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="0" width="60" height="20" uuid="84987be3-dd28-49d1-a3bd-d11cbf78f63a"/>
+				<text><![CDATA[Estudiante:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="40" width="60" height="20" uuid="a1a95695-90d6-4348-843f-540c01393943"/>
+				<text><![CDATA[Dirección:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="427" y="0" width="28" height="20" uuid="d32699ff-e8b4-445f-aa0c-363c81400c25"/>
+				<text><![CDATA[DNI:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="401" y="20" width="54" height="20" uuid="1b04c38f-e6d5-43cb-b597-a16e03eafc47"/>
+				<text><![CDATA[Fec. Nac.:]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="20" splitType="Stretch">
+			<rectangle>
+				<reportElement x="0" y="0" width="555" height="20" backcolor="#CCCCFF" uuid="9491fb6e-39d5-4867-9f2f-c4d8b1c1b0e1"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="0" y="0" width="138" height="20" uuid="facfca2c-8925-45b5-80e3-b60fc394521c"/>
+				<text><![CDATA[Fecha]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="138" y="0" width="138" height="20" uuid="cf2d36a0-c1c8-4189-824a-104b92dbb23d"/>
+				<text><![CDATA[HoraEntrada]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="276" y="0" width="138" height="20" uuid="1725bcf6-71d1-4911-979f-7f49797e5ce3"/>
+				<text><![CDATA[Falta]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="414" y="0" width="138" height="20" uuid="bc168e88-01b8-4e41-b54b-8410af7be148"/>
+				<text><![CDATA[Tardanza]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="20" splitType="Stretch">
+			<rectangle>
+				<reportElement x="0" y="0" width="555" height="20" uuid="60d18edd-c3f3-4d41-9f44-7a8366bbf2ed"/>
+			</rectangle>
+			<textField>
+				<reportElement x="0" y="0" width="94" height="20" uuid="2db089a6-b864-4ddd-a509-5fcc43b1560e"/>
+				<textFieldExpression><![CDATA[$F{tbasistenciaestudiante_Fecha}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="138" y="0" width="138" height="20" uuid="1fbb3a13-e6e0-4e85-b1b7-9ec6cb6bcdaf"/>
+				<textFieldExpression><![CDATA[$F{tbasistenciaestudiante_HoraEntrada}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="276" y="0" width="138" height="20" uuid="6cfb250c-190b-4487-94fa-dcb8ed35499b"/>
+				<textFieldExpression><![CDATA[$F{tbasistenciaestudiante_Falta}?"SI":""]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="414" y="0" width="138" height="20" uuid="2629dffb-dd67-4a69-aee3-5559771a7d1a"/>
+				<textFieldExpression><![CDATA[$F{tbasistenciaestudiante_Tardanza}?"SI":""]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>
